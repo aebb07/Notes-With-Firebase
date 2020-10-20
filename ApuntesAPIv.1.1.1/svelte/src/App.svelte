@@ -2,7 +2,7 @@
 	import AddNew from './AddNew.svelte';
 	import ShowAllNotes from './ShowAllNotes.svelte';
 	import Login from './Login.svelte';
-	import SearchNote from './SearchNote.svelte';
+	import Footer from './Footer.svelte';
 
 	var user;
 
@@ -11,32 +11,23 @@
 <main>
 <head>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700&display=swap" rel="stylesheet"> 
 	
 </head>
 
-
-	<h1>Título principal</h1>
-
 	<Login bind:user/>
 	{#if user}
-		<AddNew/>
 		<ShowAllNotes/>
+		<AddNew/>
+		<Footer/>
 	{/if}
 </main>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+		font-family: 'Poppins',sans-serif;
+		background: #242424;
 	}
 
 	@media (min-width: 640px) {

@@ -1,10 +1,8 @@
 <script>
-import AddNew from './AddNew.svelte';
 import {firestoreDb} from './firebase';
-import Login from './Login.svelte';
 import Notes from './Notes.svelte';
-import SearchNote from './SearchNote.svelte';
 var searching = '';
+searching.toLowerCase();
 
 var allNotes= [];
 var someNotes = [];
@@ -46,7 +44,13 @@ async function updateSomeNotes () {
 
 
 </script>
-
+<nav>
+<div class="search-bar">
+<i id="icon" class="fas fa-search"></i>
+<input class="search" type="search" placeholder="Buscar en tus notas" bind:value={searching} on:input={updateSomeNotes}>
+</div>
+</nav>
+<h2>TUS NOTAS</h2>
 <div class ="notes">
 	{#if ! searching}
 		{#each allNotes as note, idx (note.id)}
@@ -60,9 +64,38 @@ async function updateSomeNotes () {
 </div>
 
    
-	<i id="icon" class="fas fa-search"></i>
-	<input class="search" type="search" placeholder="Buscar en tus notas" bind:value={searching} on:input={updateSomeNotes}>
-
 <style>
+	nav {
+		padding-bottom: 20px;
+	}
+
+	h2 {
+		color: #666;
+		font-size: 10px;
+		padding-bottom: 15px;
+		padding-left: 15px;
+		font-weight: 500;
+	}
+
+	.search-bar {
+		background: #4a4949;
+		padding-left: 20px;
+	}
+
+	input[type="search"] {
+		background: none;
+		border: none;
+		padding-top: 12px;
+    	color: #ccc;
+	}
+
+	#icon {
+		color: #f5f5f5;
+	}
+
+	.notes {
+		display: flex;
+	}
+ 	
 
 </style>

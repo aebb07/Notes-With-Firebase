@@ -20,8 +20,8 @@
 </script>
 
 
-<div>
+<!--div>
     <input bind:value={title} placeholder="Titulo">
-    <input bind:value={content} placeholder="Contenido">
+	<input bind:value={content} placeholder="Contenido">
+	</div-->
     <button on:click={addNote}><i class="fas fa-plus-square"></i></button>
-</div>

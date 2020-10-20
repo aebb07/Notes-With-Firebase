@@ -7,7 +7,7 @@
 
 
     var note = noteSnapshot.data();
-    var date = (new Date(note.date)).toLocaleString();
+    //var date = (new Date(note.date)).toLocaleString();
     var timer;
     var showModal = false;
 
@@ -37,10 +37,10 @@
 </script>
 
 <div class ={'notes-container ' + color } on:click={show}>
-        <input class ="title" placeholder ='Titulo' readonly bind:value={note.title} on:input={startTimer}>
+        <input class ="title" type= "text" placeholder ='Titulo' readonly bind:value={note.title} on:input={startTimer}>
     
         <textarea class ="content" placeholder ='Contenido' readonly bind:value={note.content} on:input={startTimer}></textarea>
-        <p class ="date">{date}</p>
+        <!--p class ="date">{date}</p-->
         
         <button id ="delete" on:click={deleteNote}><i class="fas fa-trash-alt"></i></button>
 
@@ -54,6 +54,28 @@
 
 
 <style>
+
+    input[type="text"], textarea {
+        display: flex;
+        flex-direction: column;
+        width: 230px;
+        background: none;
+        resize: none;
+        border: none;
+        color: #f5f5f5;
+    }
+
+    .notes-container {
+        width: 230px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        border-radius: 7px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
 	.color1 {
 	background-color:#264653;
 }
