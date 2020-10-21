@@ -1,11 +1,17 @@
 <script>
 import {firestoreDb} from './firebase';
 import Notes from './Notes.svelte';
-var searching = '';
-searching.toLowerCase();
 
+var searching = '';
 var allNotes= [];
 var someNotes = [];
+
+
+function normalized(string) {
+		var lower = string.toLowerCase();
+        var normal = lower.normalize('NFD').replace(/[\u0300-\u036f]/g,"");
+		return normal
+	}
 
 firestoreDb.collection('notes').orderBy('date','desc')
 	.onSnapshot(
@@ -28,9 +34,9 @@ async function updateSomeNotes () {
 			querySnapshot => {
 				var newNotes = [];
 				querySnapshot.forEach(
-					docSnap => {
-						var doc = docSnap.data();
-						if (doc.title.search(searching) != -1) {
+					docSnap=> {
+						var searchDoc = normalized(searching);
+						if (docSnap.titleNormalized.search(searchDoc) != -1) {
 							newNotes.push(docSnap);
 						}
 					}
@@ -41,16 +47,18 @@ async function updateSomeNotes () {
 		)
 }
 
-
-
 </script>
+
+
 <nav>
 <div class="search-bar">
 <i id="icon" class="fas fa-search"></i>
 <input class="search" type="search" placeholder="Buscar en tus notas" bind:value={searching} on:input={updateSomeNotes}>
 </div>
 </nav>
+
 <h2>TUS NOTAS</h2>
+
 <div class ="notes">
 	{#if ! searching}
 		{#each allNotes as note, idx (note.id)}
@@ -62,6 +70,7 @@ async function updateSomeNotes () {
 		{/each}
 	{/if}
 </div>
+
 
    
 <style>
@@ -95,6 +104,7 @@ async function updateSomeNotes () {
 
 	.notes {
 		display: flex;
+		flex-wrap: wrap;
 	}
  	
 

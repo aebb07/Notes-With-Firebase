@@ -5,30 +5,41 @@
 
     var note = noteSnapshot.data();
     var date = (new Date(note.date)).toLocaleString();
+    var timer;
+
+    $: note.titleNormalized = normalized(note.title);
 
     showModal = true;
  
-    async function hide() {
-        showModal = false;
+    function normalized(string) {
+		var lower = string.toLowerCase();
+        var normal = lower.normalize('NFD').replace(/[\u0300-\u036f]/g,"");
+		return normal
     }
+    
+    async function hide() {
+        console.log('hiding')
+        showModal = false;
+    };
 
     async function editDocument() {
         noteSnapshot.ref.update(note);
         console.log('Note updated')
-    }
+    };
 
     async function startTimer() {
         if (timer) clearTimeout(timer);
         timer = setTimeout(editDocument, 1000);
-    }
+    };
+
 </script>
 
     <div class={"modal " + color}>
         <span class="back" on:click={hide}><i class="fas fa-arrow-left"></i></span>
         <div class="inputs-modal">
-            <input class="input-modal" type="text" placeholder= "Titulo" bind:value={note.title} on:keyup={editDocument}>
+            <input class="input-modal" type="text" placeholder= "Titulo" bind:value={note.title} on:keyup={startTimer}>
 
-            <textarea class="content-modal" cols="20" rows="4" placeholder= "Contenido" bind:value={note.content} on:keyup={editDocument}></textarea>
+            <textarea class="content-modal" cols="20" rows="4" placeholder= "Contenido" bind:value={note.content} on:keyup={startTimer}></textarea>
         </div>
         <p class ="date">Editado {date}</p>
     </div>

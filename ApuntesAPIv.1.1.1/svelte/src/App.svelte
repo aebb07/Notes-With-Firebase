@@ -2,7 +2,6 @@
 	import AddNew from './AddNew.svelte';
 	import ShowAllNotes from './ShowAllNotes.svelte';
 	import Login from './Login.svelte';
-	import Footer from './Footer.svelte';
 
 	var user;
 
@@ -20,14 +19,12 @@
 	{#if user}
 		<ShowAllNotes/>
 		<AddNew/>
-		<Footer/>
 	{/if}
 </main>
 
 <style>
 	main {
 		font-family: 'Poppins',sans-serif;
-		background: #242424;
 	}
 
 	@media (min-width: 640px) {
