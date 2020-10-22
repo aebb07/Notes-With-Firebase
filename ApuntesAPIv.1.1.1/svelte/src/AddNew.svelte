@@ -3,6 +3,7 @@
 	
 	var title = '';
 	var content = '';
+	export var user;
 
 	async function addNote() {
 		var doc = {
@@ -11,7 +12,8 @@
 			content: content,
 			date: Date.now(),
 		}
-		await firestoreDb.collection('notes').add(doc);
+		//await firestoreDb.collection('notes').add(doc);
+		await firestoreDb.collection(user.uid).add(doc);
 		cleanInput();
 	}
 	

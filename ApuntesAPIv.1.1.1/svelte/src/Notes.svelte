@@ -1,14 +1,12 @@
 <script>
     import Modal from './Modal.svelte';
     export var noteSnapshot;
-    export var idx;
+    export var color;
 
 
     var note = noteSnapshot.data();
     var showModal = false;
-    var colorClass = ['color1','color2','color3','color4','color5'];
-    var colorIdx = idx%colorClass.length
-    var color = colorClass[colorIdx]
+
 
     noteSnapshot.ref.onSnapshot(
         documentSnapshot => {
@@ -27,9 +25,9 @@
     }
 </script>
 
-<div class ={'notes-container ' + color } on:click={show}>
-        <input class ="title" type= "text" placeholder ='Titulo' readonly bind:value={note.title}>
-        <textarea class ="content" placeholder ='Contenido' readonly bind:value={note.content}></textarea>
+<div class ={'notes-container ' + color }>
+        <input class ="title" type= "text" placeholder ='Titulo' readonly bind:value={note.title} on:click={show}>
+        <textarea class ="content" placeholder ='Contenido' readonly bind:value={note.content} on:click={show}></textarea>
             <span id ="delete" on:click={deleteNote}><i class="fas fa-trash-alt"></i></span>
 
     {#if showModal}	

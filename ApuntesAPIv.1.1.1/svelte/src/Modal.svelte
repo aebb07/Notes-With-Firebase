@@ -41,7 +41,7 @@
 
             <textarea class="content-modal" cols="20" rows="4" placeholder= "Contenido" bind:value={note.content} on:keyup={startTimer}></textarea>
         </div>
-        <p class ="date">Editado {date}</p>
+        <p class ="date">Editado: {date}</p>
     </div>
 
 
@@ -60,6 +60,7 @@
         display: flex;
         padding-top: 15px;
         padding-bottom: 15px;
+        padding-left: 20px;
     }
 
     input[type="text"], textarea {
@@ -80,7 +81,8 @@
     }
 
     .date {
-        color: #666;
+        color: #f5f5f5;
+        font-size: 11px;
     }
 
 	.color1 {

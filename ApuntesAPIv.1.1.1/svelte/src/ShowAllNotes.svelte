@@ -5,6 +5,7 @@ import Notes from './Notes.svelte';
 var searching = '';
 var allNotes= [];
 var someNotes = [];
+const colorClass = ['color1','color2','color3','color4','color5'];
 
 
 function normalized(string) {
@@ -17,9 +18,14 @@ firestoreDb.collection('notes').orderBy('date','desc')
 	.onSnapshot(
 		querySnapshot => {
 			var newNotes = [];
+			var idx = 0
 			querySnapshot.forEach(
 				docSnap => {
+					var colorIdx = idx%colorClass.length
+					var color = colorClass[colorIdx]
+					docSnap.color=color;
 					newNotes.push(docSnap);
+					idx++;
 				}
 			)
 			allNotes = [...newNotes]
@@ -36,7 +42,9 @@ async function updateSomeNotes () {
 				querySnapshot.forEach(
 					docSnap=> {
 						var searchDoc = normalized(searching);
-						if (docSnap.titleNormalized.search(searchDoc) != -1) {
+						var doc = docSnap.data();
+						console.log(doc);
+						if (doc.titleNormalized.search(searchDoc) != -1) {
 							newNotes.push(docSnap);
 						}
 					}
@@ -61,12 +69,12 @@ async function updateSomeNotes () {
 
 <div class ="notes">
 	{#if ! searching}
-		{#each allNotes as note, idx (note.id)}
-			<Notes idx = {idx} noteSnapshot ={note}/>
+		{#each allNotes as note (note.id)}
+			<Notes color = {note.color} noteSnapshot ={note}/>
 		{/each}
 	{:else}
-		{#each someNotes as note, idx (note.id)}
-			<Notes idx = {idx} noteSnapshot ={note}/>
+		{#each someNotes as note (note.id)}
+			<Notes color = {note.color} noteSnapshot ={note}/>
 		{/each}
 	{/if}
 </div>
