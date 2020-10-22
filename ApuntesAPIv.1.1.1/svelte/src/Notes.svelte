@@ -63,6 +63,7 @@
     #delete {
         padding: 10px;
         float: right;
+        color: #242424;
     }
 
 	.color1 {

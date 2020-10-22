@@ -6,7 +6,7 @@ var searching = '';
 var allNotes= [];
 var someNotes = [];
 const colorClass = ['color1','color2','color3','color4','color5'];
-
+export var user;
 
 
 function normalized(string) {
@@ -15,7 +15,7 @@ function normalized(string) {
 		return normal
 	}
 
-firestoreDb.collection('notes').orderBy('date','desc')
+firestoreDb.collection(user.uid).orderBy('date','desc')
 	.onSnapshot(
 		querySnapshot => {
 			var newNotes = [];
@@ -36,7 +36,7 @@ firestoreDb.collection('notes').orderBy('date','desc')
 
 
 async function updateSomeNotes () {
-	firestoreDb.collection('notes').orderBy('date','desc')
+	firestoreDb.collection(user.uid).orderBy('date','desc')
 		.onSnapshot(
 			querySnapshot => {
 				var newNotes = [];

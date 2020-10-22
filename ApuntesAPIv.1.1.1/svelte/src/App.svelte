@@ -18,8 +18,8 @@
 
 	<Login bind:user/>
 	{#if user}
-		<ShowAllNotes/>
-		<AddNew/>
+		<ShowAllNotes bind:user/>
+		<AddNew bind:user/>
 	{/if}
 </main>
 
