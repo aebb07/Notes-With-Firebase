@@ -8,6 +8,7 @@ var someNotes = [];
 const colorClass = ['color1','color2','color3','color4','color5'];
 
 
+
 function normalized(string) {
 		var lower = string.toLowerCase();
         var normal = lower.normalize('NFD').replace(/[\u0300-\u036f]/g,"");
