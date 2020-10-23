@@ -66,6 +66,10 @@
         color: #242424;
     }
 
+    .content {
+        overflow:hidden;
+    }
+
 	.color1 {
 	background-color:#264653;
     }
