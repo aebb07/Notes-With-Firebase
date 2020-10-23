@@ -3,6 +3,7 @@
 	import ShowAllNotes from './ShowAllNotes.svelte';
 	import Login from './Login.svelte';
 
+
 	var user;
 
 </script>
@@ -27,6 +28,8 @@
 	main {
 		font-family: 'Poppins',sans-serif;
 	}
+
+
 
 	@media (min-width: 640px) {
 		main {

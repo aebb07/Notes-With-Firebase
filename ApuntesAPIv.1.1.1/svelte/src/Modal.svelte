@@ -61,6 +61,7 @@
         padding-top: 15px;
         padding-bottom: 15px;
         padding-left: 20px;
+        color: #242424;
     }
 
     input[type="text"], textarea {
@@ -83,6 +84,7 @@
     .date {
         color: #f5f5f5;
         font-size: 11px;
+        margin-left: 15px;
     }
 
 	.color1 {

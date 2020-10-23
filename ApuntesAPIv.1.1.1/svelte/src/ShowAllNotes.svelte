@@ -40,14 +40,19 @@ async function updateSomeNotes () {
 		.onSnapshot(
 			querySnapshot => {
 				var newNotes = [];
+				var idx = 0
 				querySnapshot.forEach(
 					docSnap=> {
+						var colorIdx = idx%colorClass.length
+						var color = colorClass[colorIdx]
+						docSnap.color=color;
 						var searchDoc = normalized(searching);
 						var doc = docSnap.data();
 						console.log(doc);
 						if (doc.titleNormalized.search(searchDoc) != -1) {
 							newNotes.push(docSnap);
 						}
+						idx++;
 					}
 				)
 				someNotes = [...newNotes]

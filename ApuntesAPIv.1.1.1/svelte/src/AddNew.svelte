@@ -1,10 +1,11 @@
 <script>
 	import {firestoreDb} from './firebase';
+	import DarkMode from './DarkMode.svelte';
 	
 	var title = '';
 	var content = '';
 	export var user;
-
+	
 	async function addNote() {
 		var doc = {
 			title: title,
@@ -12,9 +13,10 @@
 			content: content,
 			date: Date.now(),
 		}
-		//await firestoreDb.collection('notes').add(doc);
+		
 		await firestoreDb.collection(user.uid).add(doc);
 		cleanInput();
+		show()
 	}
 	
     async function cleanInput() {
@@ -27,6 +29,7 @@
 
 <footer>
 	<button class="add" on:click={addNote}><i class="fas fa-plus"></i></button>
+	<DarkMode/>
 </footer>
 
 
@@ -43,7 +46,7 @@
 	.add {
 		color: #f5f5f5;
 		font-size: 30px;
-		margin-left: 20px;
+		margin-right: 25px;
 		bottom: 40px;
 		position: relative;
 		background: #3e3c3c;
@@ -52,6 +55,7 @@
 		padding-bottom: 3px;
 		padding-top: 3px;
 		box-shadow: 5px 10px 5px 0px rgba(0, 0, 0, 0.3);
+		float: right;
 	}
 
 </style>
